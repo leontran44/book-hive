@@ -9,3 +9,55 @@
 </div>
 {{/each}}
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <!-- Navbar brand/title -->
+    <a class="navbar-brand" href="#">{{title}}</a>
+
+    <!-- Toggler/collapsible button for mobile view -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links, search bar, and buttons -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Additional links can be added here if needed -->
+      </ul>
+
+      <!-- Search bar -->
+      <form class="d-flex" action="/search" method="GET">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+      <!-- Profile and Logout buttons -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="btn btn-primary ms-2" href="/profile">{{profileButtonText}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-danger ms-2" href="/logout">{{logoutButtonText}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="books-list my-5">
+            <div class="row">
+                {{#each books}}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.title}}</h5>
+                            <p class="card-text">Author: {{this.author}}</p>
+                            <p class="card-text">Genre: {{this.genre}}</p>
+                            <a href="/books/{{this.id}}" class="btn btn-primary">View Book</a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        
+</nav>

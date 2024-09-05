@@ -6,7 +6,7 @@ const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 const hbs = exphbs.create({ helpers });
 
@@ -19,6 +19,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-sequelize.sync({ force: false }).then(() => {
+// sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
-});
+// });
