@@ -1,10 +1,11 @@
-const router = require('express').Router();
-const { User } = require('../models');
+const router = require("express").Router();
+const { User } = require("../models");
+const withAuth = require("../utils/auth");
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   // TODO: Render template with Sequelize data
   // try {
-  //   const userData = await User.findAll({ 
+  //   const userData = await User.findAll({
   //     attributes: { exclude: ['password'] },
   //     order: [['name', 'ASC']],
   // });
@@ -13,10 +14,7 @@ router.get('/', async (req, res) => {
   // } catch (err) {
   //   res.status(500).json(err);
   // }
-  res.render('homepage');
+  res.render("homepage");
 });
 
-
-
 module.exports = router;
-
