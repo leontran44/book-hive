@@ -19,7 +19,7 @@ Genre.init(
   },
   {
     sequelize,
-    timestamps: true, // Enable timestamps for creation and updates
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: "genre",
