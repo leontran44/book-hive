@@ -4,11 +4,11 @@ const exphbs = require("express-handlebars");
 const routes = require("./controllers");
 const helpers = require("./utils/helpers");
 const sequelize = require("./config/connection");
-const SequelizeStore = require("./config/connection");
+const sequelizeStore = require("./config/connection");
 const session = require("express-session");
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3008;
 
 const hbs = exphbs.create({ helpers });
 
@@ -22,9 +22,9 @@ const sess = {
   },
   resave: false,
   saveUninitialized: true,
-  // store: SequelizeStore({
-  //   db: sequelize,
-  // }),
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
 };
 
 app.use(session(sess));
