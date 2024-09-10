@@ -14,13 +14,22 @@
             <p>{{description}}</p>
         </header>
         <main>
-            <form action="{{loginUrl}}" method="post" class="login-form">
-                <button type="submit" class="btn btn-login">Login</button>
-            </form>
-            <form action="{{signupUrl}}" method="get" class="signup-form">
-                <button type="submit" class="btn btn-signup">Sign Up</button>
-            </form>
-        </main>
+    <form action="{{loginUrl}}" method="post" class="login-form">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <form action="{{signupUrl}}" method="get" class="signup-form mt-3">
+        <button type="submit" class="btn btn-secondary">Sign Up</button>
+    </form>
+</main>
+
     </div>
 </body>
 </html>
