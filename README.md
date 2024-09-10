@@ -23,8 +23,8 @@ The goal of Book-Hive is to provide an interactive platform for readers to post 
 
 Book-Hive is a collaborative full-stack application designed for book lovers to share and analyze book reviews. The platform enables users to register, log in, post reviews, and use machine learning to analyze the sentiment of those reviews. Built using modern technologies, Book-Hive showcases a seamless interaction between the front end and back end, demonstrating a strong user authentication system, RESTful API, and responsive design.
 
-
 ### Features include:
+
 - User Authentication: Secure sign-up, log-in, and session handling using express-session and bcrypt.
 - RESTful API: Robust back-end functionality with Node.js and Express.js for handling HTTP requests.
 - Sentiment Analysis: Integration of TensorFlow.js for analyzing user reviews' sentiment and providing feedback via a dynamic star rating system.
@@ -93,43 +93,49 @@ BOOK-HIVE/
 └── server.js                   # Entry point for the Express server
 
 
-
-
 ```
-###  :hammer: 
 
-Build
+### :hammer: Build
 
 MVC Structure:
+
 - Models: Created using Sequelize ORM to manage database entities like users, books, and reviews.
 - Views: Developed using Handlebars.js to dynamically render HTML content.
 - Controllers: API endpoints to handle CRUD operations for users and books.
 
 Authentication:
+
 - express-session: For managing user sessions and cookies.
 - bcrypt: For securely hashing and storing passwords.
 
 Sentiment Analysis:
+
 - TensorFlow.js: Integrated to analyze the sentiment of user reviews and provide dynamic star ratings.
 
 Database:
+
 - PostgreSQL: Managed with Sequelize ORM for a structured, relational database.
 - Sequelize ORM: Enables interaction between the server and the PostgreSQL database using models to perform CRUD operations on data.
 
 Version Control:
+
 - Project is version-controlled with Git, using branches and pull requests for collaborative development.
 
 Environment Setup:
+
 - dotenv: Used to manage environment variables, ensuring sensitive information such as database credentials, API keys, and session secrets are not hardcoded.
 
 Version Control:
+
 - Project development was tracked using Git, with branches for new features and bug fixes.
 - All changes were version-controlled via GitHub with regular commits, pull requests, and reviews to maintain code integrity and team collaboration.
 
 Responsive and Polished UI:
+
 - Custom CSS: Additional styling provided to maintain consistent branding and user-friendly design.
 
 Code Quality:
+
 - Code Notes: Throughout the codebase, detailed and concise comments are added to clarify the functionality of complex logic, making the code more readable and maintainable for future contributors.
 - Controller Files: Comments explain routes, logic flow, and error handling.
 - Models: Comments in models explain relationships between tables (e.g., Users and Books).
@@ -160,6 +166,7 @@ Software used
 - Git Bash - A command-line interface for Git, providing Unix-like shell commands for version control and repository management.
 
 API's and Libraries
+
 - Express.js: Server framework for Node.js.
 - Sequelize: ORM for interacting with the PostgreSQL database.
 - TensorFlow.js: Machine learning library used for sentiment analysis.
@@ -168,6 +175,7 @@ API's and Libraries
 - Handlebars.js: Templating engine for rendering dynamic HTML.
 
 Development Tools:
+
 - Browser Developer Tools: Built-in tools in web browsers like Chrome and Firefox, used for debugging and inspecting the application's HTML, CSS, and JavaScript.
 
 ##  :camera: Gallery
@@ -176,10 +184,15 @@ Below is a preview photo of the website.
 
 Click here to view preview photos: [CLICK HERE](ENTER WEBSITE HERE)
 
-
 ## :star2: Credit/Acknowledgment
 
-Team Book Hive !
+Team Book Hive!
 
-##  :lock: License
-This project is licensed under the MIT License.
+- [Leon Tran](https://github.com/leontran44)
+- [Adam Todorovic](https://github.com/ProjectAdam95)
+- [Zoe (Wenli Zhong)](https://github.com/Zoooe-Brooo)
+- [Lewis Johns](https://github.com/lewisgjohns)
+
+## :lock: License
+
+This project is licensed under the [MIT](https://opensource.org/license/mit) License.

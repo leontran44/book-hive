@@ -43,7 +43,7 @@ router.get("/books/:id", async (req, res) => {
           model: Review,
           include: {
             model: User,
-            attributes: ["name"],
+            attributes: ["username"],
           },
         },
       ],
