@@ -93,13 +93,9 @@ BOOK-HIVE/
 └── server.js                   # Entry point for the Express server
 
 
-
-
 ```
 
-### :hammer:
-
-Build
+### :hammer: Build
 
 MVC Structure:
 
@@ -150,24 +146,23 @@ Code Quality:
 
 - To deploy the website please visit : [ENTER WEBSITE HERE](WEBSITE HERE)
 
-### :fire: Contribution
+ ###  :fire: Contribution
 
-- Your contributions are always welcome and greatly appreciated. Here are some ways you can contribute to the project:
+ - Your contributions are always welcome and greatly appreciated. Here are some ways you can contribute to the project:
 
-1.  **Report a bug** <br>
-    If you think you have encountered a bug, and I should know about it, feel free to report it here [here](https://github.com/leontran44/book-hive/issues). I will look into it and take the necessary steps.
+ 1. **Report a bug** <br>
+ If you think you have encountered a bug, and I should know about it, feel free to report it here [here](https://github.com/leontran44/book-hive/issues). I will look into it and take the necessary steps.
+ 
+ 2. **Request a feature** <br>
+ If you have a feature idea that you think would enhance the project, you can request it [here](https://github.com/leontran44/book-hive/issues), If the feature is deemed viable, it will be considered for development. 
 
-2.  **Request a feature** <br>
-    If you have a feature idea that you think would enhance the project, you can request it [here](https://github.com/leontran44/book-hive/issues), If the feature is deemed viable, it will be considered for development.
+ 3. **Create a pull request** <br>
+ The best way to contribute is by creating a pull request. The community will appreciate your efforts. You can start by picking up any open issues from [here](https://github.com/leontran44/book-hive/issues)and submitting a pull request.
 
-3.  **Create a pull request** <br>
-    The best way to contribute is by creating a pull request. The community will appreciate your efforts. You can start by picking up any open issues from [here](https://github.com/leontran44/book-hive/issues) and submitting a pull request.
-
-## :page_facing_up: Resources
+##  :page_facing_up: Resources
 
 Software used
-
-- VS Code - A powerful code editor for writing and managing code across various programming languages.
+- VS Code -  A powerful code editor for writing and managing code across various programming languages.
 - Git Bash - A command-line interface for Git, providing Unix-like shell commands for version control and repository management.
 
 API's and Libraries
@@ -183,7 +178,7 @@ Development Tools:
 
 - Browser Developer Tools: Built-in tools in web browsers like Chrome and Firefox, used for debugging and inspecting the application's HTML, CSS, and JavaScript.
 
-## :camera: Gallery
+##  :camera: Gallery
 
 Below is a preview photo of the website.
 
