@@ -1,13 +1,25 @@
 const router = require("express").Router();
-const { User, Book, Review } = require("../models");
+const { User, Book, Genre } = require("../models");
 const withAuth = require("../utils/auth");
 
 // home page (get all books)
 router.get("/", async (req, res) => {
   try {
-    const bookData = await Book.findAll();
+    const bookData = await Book.findAll({
+      include: [
+        {
+          model: Genre,
+          attributes: ["name"],
+        },
+      ],
+    });
+
     const books = bookData.map((book) => book.get({ plain: true }));
-    res.render("homepage", { books });
+
+    res.render("homepage", {
+      books,
+      logged_in: req.session.logged_in,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -16,62 +28,21 @@ router.get("/", async (req, res) => {
 // login page
 router.get("/login", (req, res) => {
   if (req.session.logged_in) {
-    res.redirect("/user/:id");
+    res.redirect(`/user/${req.session.user_id}`);
     return;
   }
 
   res.render("login");
 });
 
-// signout page
-router.get("/signout", (req, res) => {
+// signup page
+router.get("/signup", (req, res) => {
   if (req.session.logged_in) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
+    res.redirect(`/user/${req.session.user_id}`);
+    return;
   }
 
-  res.render("signout");
-});
-
-// open a single book by its `book_id` and it's reviews
-router.get("/books/:id", async (req, res) => {
-  try {
-    const bookData = await Book.findByPk(req.params.id, {
-      include: [
-        {
-          model: Review,
-          include: {
-            model: User,
-            attributes: ["username"],
-          },
-        },
-      ],
-    });
-
-    const book = bookData.get({ plain: true });
-
-    res.render("bookpage", {
-      ...book,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// get all users
-router.get("/users", async (req, res) => {
-  try {
-    const userData = await User.findAll({
-      attributes: { exclude: ["password"] },
-      order: [["name", "ASC"]],
-    });
-    const users = userData.map((user) => user.get({ plain: true }));
-
-    res.render("users", { users });
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  res.render("signup");
 });
 
 // after a user logs in, they are directed to their profile page
@@ -92,6 +63,33 @@ router.get("/user/:id", withAuth, async (req, res) => {
     res.render("userpage", {
       ...user,
       logged_in: true,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// open a single book by its `book_id` and it's reviews
+router.get("/books/:id", async (req, res) => {
+  try {
+    const bookData = await Book.findByPk(req.params.id, {
+      include: [
+        {
+          model: Genre,
+          attributes: ["name"],
+        },
+        {
+          model: User,
+          attributes: ["username"],
+        },
+      ],
+    });
+
+    const book = bookData.get({ plain: true });
+
+    res.render("bookpage", {
+      ...book,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);

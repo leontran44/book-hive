@@ -1,30 +1,26 @@
 const router = require("express").Router();
-const { User, Book, Review } = require("../../models");
+const { Book } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-// can only add new reviews if logged in, need debug
+// can only add new review/comment(inside book table) if logged in
 router.post("/:id", withAuth, async (req, res) => {
   try {
-    const newReview = await Review.create({
+    const reviewData = await Book.comments.create({
       ...req.body,
       user_id: req.session.user_id,
       book_id: req.params.book_id,
     });
 
-    res.status(200).json(newReview);
-
-    res.render("bookpage", {
-      ...newReview,
-    });
+    res.status(200).json(reviewData);
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-// can only update reviews if logged in, need debug
-router.put("/review/:id", withAuth, async (req, res) => {
+// can only update review (or "comments" from book table) to this book if logged in
+router.put("/:id", withAuth, async (req, res) => {
   try {
-    const reviewData = await Review.update(req.body, {
+    const reviewData = await Book.comments.update(req.body, {
       where: {
         id: req.params.id,
         user_id: req.session.user_id,
@@ -38,20 +34,15 @@ router.put("/review/:id", withAuth, async (req, res) => {
     }
 
     res.status(200).json(reviewData);
-
-    const review = reviewData.get({ plain: true });
-    res.render("bookpage", {
-      ...review,
-    });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// can only delete reviews if logged in, need debug
-router.delete("/review/:id", withAuth, async (req, res) => {
+// can only delete review (or "comments" from book table) to this book if logged in
+router.delete("/:id", withAuth, async (req, res) => {
   try {
-    const reviewData = await Review.destroy({
+    const reviewData = await Book.comments.destroy({
       where: {
         id: req.params.id,
         user_id: req.session.user_id,
@@ -65,11 +56,6 @@ router.delete("/review/:id", withAuth, async (req, res) => {
     }
 
     res.status(200).json(reviewData);
-
-    const review = reviewData.get({ plain: true });
-    res.render("bookpage", {
-      ...review,
-    });
   } catch (err) {
     res.status(500).json(err);
   }
