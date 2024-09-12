@@ -182,7 +182,7 @@ Development Tools:
 
 Below is a preview photo of the website.
 
-Click here to view preview photos: [CLICK HERE](ENTER WEBSITE HERE)
+Click here to view preview photos: [CLICK HERE](https://book-hive-c90u.onrender.com)
 
 ## :star2: Credit/Acknowledgment
 
