@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Book, Genre } = require("../models");
+const { User, Book, Review } = require("../models");
 const withAuth = require("../utils/auth");
 
 // home page (get all books)
@@ -8,8 +8,8 @@ router.get("/", async (req, res) => {
     const bookData = await Book.findAll({
       include: [
         {
-          model: Genre,
-          attributes: ["name"],
+          model: Review,
+          attributes: ["review_content"],
         },
       ],
     });
@@ -19,6 +19,7 @@ router.get("/", async (req, res) => {
     res.render("homepage", {
       books,
       logged_in: req.session.logged_in,
+      user_id: req.session.user_id,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -28,7 +29,7 @@ router.get("/", async (req, res) => {
 // login page
 router.get("/login", (req, res) => {
   if (req.session.logged_in) {
-    res.redirect(`/user/${req.session.user_id}`);
+    res.redirect("/profile");
     return;
   }
 
@@ -38,7 +39,7 @@ router.get("/login", (req, res) => {
 // signup page
 router.get("/signup", (req, res) => {
   if (req.session.logged_in) {
-    res.redirect(`/user/${req.session.user_id}`);
+    res.redirect("/profile");
     return;
   }
 
@@ -46,14 +47,20 @@ router.get("/signup", (req, res) => {
 });
 
 // after a user logs in, they are directed to their profile page
-router.get("/user/:id", withAuth, async (req, res) => {
+router.get("/profile", withAuth, async (req, res) => {
   try {
-    const userData = await User.findByPk(req.params.id, {
+    const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
       include: [
         {
-          model: Book,
-          attributes: ["title"],
+          model: Review,
+          attributes: ["review_content"],
+          include: [
+            {
+              model: Book,
+              attributes: ["title"],
+            },
+          ],
         },
       ],
     });
@@ -70,17 +77,19 @@ router.get("/user/:id", withAuth, async (req, res) => {
 });
 
 // open a single book by its `book_id` and it's reviews
-router.get("/books/:id", async (req, res) => {
+router.get("/book/:id", async (req, res) => {
   try {
     const bookData = await Book.findByPk(req.params.id, {
       include: [
         {
-          model: Genre,
-          attributes: ["name"],
-        },
-        {
-          model: User,
-          attributes: ["username"],
+          model: Review,
+          attributes: ["review_content"],
+          include: [
+            {
+              model: User,
+              attributes: ["username"],
+            },
+          ],
         },
       ],
     });

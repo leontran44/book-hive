@@ -2,13 +2,13 @@ const router = require("express").Router();
 const { User } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-// can only update user (add/delete books list) if logged in
-router.put("/:id", withAuth, async (req, res) => {
+// can only update user (user's name, email) if logged in
+router.put("/", withAuth, async (req, res) => {
   try {
     const userData = await User.update(req.body, {
       individualHooks: true,
       where: {
-        id: req.params.id,
+        id: req.session.user_id,
       },
     });
 
@@ -24,11 +24,11 @@ router.put("/:id", withAuth, async (req, res) => {
 });
 
 // can only delete user account if logged in
-router.delete("/:id", withAuth, async (req, res) => {
+router.delete("/", withAuth, async (req, res) => {
   try {
     const userData = await User.destroy({
       where: {
-        id: req.params.id,
+        id: req.session.user_id,
       },
     });
 

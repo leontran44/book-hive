@@ -1,19 +1,23 @@
-const sequelize = require("../config/connection");
 const User = require("./User");
 const Book = require("./Book");
-const Genre = require("./Genre");
+const Review = require("./Review");
 
-// Junction Table for Books and Genres
-const BookGenre = sequelize.define(
-  "BookGenre",
-  {},
-  {
-    timestamps: false,
-    underscored: true,
-  }
-);
+User.hasMany(Review, {
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
+});
 
-Book.belongsToMany(Genre, { through: BookGenre, foreignKey: "book_id" });
-Genre.belongsToMany(Book, { through: BookGenre, foreignKey: "genre_id" });
+Book.hasMany(Review, {
+  foreignKey: "book_id",
+  onDelete: "CASCADE",
+});
 
-module.exports = { User, Book, Genre, BookGenre };
+Review.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+Review.belongsTo(Book, {
+  foreignKey: "book_id",
+});
+
+module.exports = { User, Book, Review };
