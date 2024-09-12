@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { User } = require("../../models");
 
 // login, then redirect to user's profile page
 router.post("/login", async (req, res) => {
