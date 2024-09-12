@@ -65,7 +65,11 @@ router.get("/profile", withAuth, async (req, res) => {
       ],
     });
 
-    const user = userData.get({ plain: true });
+    // const user = userData.get({ plain: true });
+    const user = {
+      username: "test",
+      email: "example@gmail.com",
+    };
 
     res.render("userpage", {
       ...user,
@@ -98,7 +102,45 @@ router.get("/book/:id", async (req, res) => {
 
     res.render("bookpage", {
       ...book,
-      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// get all users
+router.get("/users", async (req, res) => {
+  try {
+    const userData = await User.findAll({
+      attributes: { exclude: ["password"] },
+      order: [["name", "ASC"]],
+    });
+    const users = userData.map((user) => user.get({ plain: true }));
+
+    res.render("users", { users });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// after a user logs in, they are directed to their profile page
+router.get("/profile", withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id, {
+      attributes: { exclude: ["password"] },
+      include: [
+        {
+          model: Book,
+          attributes: ["title"],
+        },
+      ],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render("userpage", {
+      ...user,
+      logged_in: true,
     });
   } catch (err) {
     res.status(500).json(err);
