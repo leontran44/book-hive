@@ -25,13 +25,12 @@
           </ul>
         </div>
 
-        <!-- Logout button -->
-        <div class="d-flex align-items-center"></div>
-        <a class="btn btn-secondary me-2" href="/">Home</a>
-
-        <!-- Profile button -->
+        <!-- Logout/Profile/Login buttons -->
         <div class="d-flex align-items-center">
-          <a class="btn btn-secondary me-2" href="/profile">Profile</a>
+        <a class="btn btn-primary me-2" href="/">Home</a>
+        <a class="btn btn-primary me-2" href="/profile">Profile</a>
+
+
 
           {{#if loggedIn}}
             <a
@@ -40,7 +39,7 @@
               id="logout-link"
             >Logout</a>
           {{else}}
-            <a class="btn btn-secondary" href="/login" id="login-link">Login</a>
+            <a class="btn btn-primary" href="/login" id="login-link">Login</a>
           {{/if}}
         </div>
       </div>
