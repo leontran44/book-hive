@@ -9,12 +9,14 @@ const seedDatabase = async () => {
   try {
     await sequelize.sync({ force: true });
 
+    // Bulk create users and ensure hooks like password hashing are applied
     const users = await User.bulkCreate(userData, {
-      individualHooks: true,
+      individualHooks: true,  // This ensures the beforeCreate hook runs and hashes the passwords
       returning: true,
     });
     console.log("Users created:", users);
 
+    // Create books and reviews as normal
     const books = await Book.bulkCreate(bookData, {
       returning: true,
     });
@@ -34,7 +36,6 @@ const seedDatabase = async () => {
     }
 
     console.log("Database seeding completed successfully.");
-
     process.exit(0);
   } catch (err) {
     console.error("Error seeding database:", err);
@@ -43,3 +44,5 @@ const seedDatabase = async () => {
 };
 
 seedDatabase();
+
+
