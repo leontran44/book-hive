@@ -27,6 +27,22 @@
         <p class="text-muted">Member Since: {{user.memberSince}}</p>
       </section>
 
+      <!-- Profile Update Section -->
+      <section class="update-profile-section my-5">
+        <h3 class="text-center">Update Profile</h3>
+        <form id="update-profile-form" class="mx-auto" style="max-width: 500px;">
+          <div class="mb-3">
+            <label for="name-input" class="form-label">Name</label>
+            <input type="text" id="name-input" class="form-control" value="{{user.name}}" />
+          </div>
+          <div class="mb-3">
+            <label for="email-input" class="form-label">Email</label>
+            <input type="email" id="email-input" class="form-control" value="{{user.email}}" />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Update Profile</button>
+        </form>
+      </section>
+
       <!-- Books Section -->
       <section class="books-section my-5">
         <div class="row">
@@ -41,8 +57,13 @@
           </div>
         </div>
       </section>
+
+      <!-- Account Deletion Section -->
+      <section class="delete-account-section text-center my-5">
+        <button id="delete-account-btn" class="btn btn-danger">Delete Account</button>
+      </section>
     </div>
+
+    <script src="/js/userpage.js"></script>
   </body>
 </html>
-
-<script src="/js/userpage.js"></script>
