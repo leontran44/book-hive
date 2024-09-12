@@ -3,69 +3,35 @@
     "title": "Harry Potter and the Sorcerer's Stone",
     "description": "A young wizard's journey.",
     "author": "J.K. Rowling",
-    "cover_image": "/images/harry_potter_cover.jpg",
-    "comments": [
-      {
-        "username": "johndoe11",
-        "comment": "Amazing book! Couldn't put it down.",
-        "timestamp": "2024-09-04T10:30:00Z"
-      },
-      {
-        "username": "jane_smith2024",
-        "comment": "A magical story for all ages.",
-        "timestamp": "2024-09-05T12:15:00Z"
-      }
-    ]
+    "genre": "Fantasy",
+    "cover_image": "/images/harry_potter_cover.jpg"
   },
   {
     "title": "The Hobbit",
     "description": "A hobbit's adventure.",
     "author": "J.R.R. Tolkien",
-    "cover_image": "/images/the_hobbit_cover.jpg",
-    "comments": [
-      {
-        "username": "michael_king",
-        "comment": "A true adventure classic.",
-        "timestamp": "2024-09-06T14:45:00Z"
-      }
-    ]
+    "genre": "Adventure",
+    "cover_image": "/images/the_hobbit_cover.jpg"
   },
   {
     "title": "Dune",
     "description": "A tale of political intrigue and adventure on a desert planet.",
     "author": "Frank Herbert",
-    "cover_image": "/images/dune_cover.jpg",
-    "comments": []
+    "genre": "Science Fiction",
+    "cover_image": "/images/dune_cover.jpg"
   },
   {
     "title": "Pride and Prejudice",
     "description": "A classic romantic novel.",
     "author": "Jane Austen",
-    "cover_image": "/images/pride_prejudice_cover.jpg",
-    "comments": [
-      {
-        "username": "annabell234",
-        "comment": "Beautifully written.",
-        "timestamp": "2024-09-07T09:00:00Z"
-      },
-      {
-        "username": "captain_america",
-        "comment": "A timeless romance.",
-        "timestamp": "2024-09-08T11:30:00Z"
-      }
-    ]
+    "genre": "Romance",
+    "cover_image": "/images/pride_prejudice_cover.jpg"
   },
   {
     "title": "The Great Gatsby",
     "description": "A tragic story of the American dream.",
     "author": "F. Scott Fitzgerald",
-    "cover_image": "/images/great_gatsby_cover.jpg",
-    "comments": [
-      {
-        "username": "johndoe11",
-        "comment": "A classic tale of love and tragedy.",
-        "timestamp": "2024-09-09T14:00:00Z"
-      }
-    ]
+    "genre": "Classic",
+    "cover_image": "/images/great_gatsby_cover.jpg"
   }
 ]

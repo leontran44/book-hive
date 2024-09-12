@@ -1,29 +1,39 @@
 const sequelize = require("../config/connection");
-const { User, Book, Genre } = require("../models");
+const { User, Book, Review } = require("../models");
 
 const userData = require("./userData.json");
 const bookData = require("./bookData.json");
-const genreData = require("./genreData.json");
+const reviewData = require("./reviewData.json");
 
 const seedDatabase = async () => {
   try {
     await sequelize.sync({ force: true });
 
-    await User.bulkCreate(userData, {
+    const users = await User.bulkCreate(userData, {
       individualHooks: true,
       returning: true,
     });
-    console.log("Users seeded successfully");
+    console.log("Users created:", users);
 
-    await Book.bulkCreate(bookData, {
+    const books = await Book.bulkCreate(bookData, {
       returning: true,
     });
-    console.log("Books seeded successfully");
+    console.log("Books created:", books);
 
-    await Genre.bulkCreate(genreData, {
-      returning: true,
-    });
-    console.log("Genres seeded successfully");
+    for (const review of reviewData) {
+      const randomUser = users[Math.floor(Math.random() * users.length)];
+      const randomBook = await Book.findOne({
+        order: sequelize.random(),
+      });
+      const createdReview = await Review.create({
+        ...review,
+        user_id: randomUser.id,
+        book_id: randomBook.id,
+      });
+      console.log("Review created:", createdReview);
+    }
+
+    console.log("Database seeding completed successfully.");
 
     process.exit(0);
   } catch (err) {
