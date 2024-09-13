@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
           const response = await fetch("/api/user", {
             method: "DELETE",
+            headers: { "Content-Type": "application/json" },
           });
 
           if (response.ok) {

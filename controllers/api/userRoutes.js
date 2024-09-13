@@ -44,7 +44,18 @@ router.delete("/", withAuth, async (req, res) => {
       return;
     }
 
-    res.status(200).json(userData);
+    req.session.destroy((err) => {
+      if (err) {
+        res
+          .status(500)
+          .json({
+            message: "Failed to destroy session after deleting account.",
+          });
+        return;
+      }
+
+      res.status(200).json(userData);
+    });
   } catch (err) {
     res.status(500).json(err);
   }
