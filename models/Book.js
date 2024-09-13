@@ -22,16 +22,13 @@ Book.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    genre: {
+      type: DataTypes.STRING,  
+      allowNull: false,
+    },
     cover_image: {
       type: DataTypes.STRING,
       allowNull: true,
-    },
-    genre_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "genre",
-        key: "id",
-      },
     },
   },
   {
