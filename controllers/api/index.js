@@ -7,8 +7,9 @@ const logoutRoutes = require("./logoutRoutes");
 
 router.use("/user", userRoutes);
 router.use("/book", bookRoutes);
-router.use("/login", loginRoutes);
+router.use("/login", loginRoutes); 
 router.use("/signup", signupRoutes);
 router.use("/logout", logoutRoutes);
 
 module.exports = router;
+
