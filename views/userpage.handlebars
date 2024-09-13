@@ -7,16 +7,16 @@
   <!-- User Info Section -->
   <section class="user-info text-center my-4">
     <h2 class="my-3">{{username}}</h2>
-    <img
+    {{! <img
       src="/image/profile-image.png"
       alt="User Avatar"
       class="rounded-circle"
       style="width: 150px; height: 150px;"
-    />
+    /> }}
   </section>
 
   <!-- Profile Update Section -->
-  {{!-- <section class="update-profile-section my-5">
+  <section class="update-profile-section my-5">
     <h3 class="text-center">Update Username/Email</h3>
     <form id="update-profile-form" class="mx-auto" style="max-width: 500px;">
       <div class="mb-3">
@@ -26,7 +26,7 @@
           id="name-input"
           class="form-control"
           value="{{username}}"
-        />
+        /><br />
       </div>
       <div class="mb-3">
         <label for="email-input" class="form-label">Email</label>
@@ -35,27 +35,31 @@
           id="email-input"
           class="form-control"
           value="{{email}}"
-        />
+        /><br />
       </div>
-      <button type="submit" class="btn btn-primary w-100">Update Profile</button>
+      <button type="submit" class="btn btn-primary">Update</button>
     </form>
-  </section> --}}
+  </section>
 
   <!-- Books Section -->
   <section class="books-section my-5">
     <div class="row">
       <!-- Books I Have Read -->
       <div class="col-md-4">
-        <h3>Books I Am Recomended:</h3>
+        <h3>Books I Recomend:</h3>
         <div class="list-group">
-          {{#each books as |book|}}
-            <a href="/book/{{book.id}}" class="list-group-item">
-              <div class="row align-center mb-5">
-                <div class="col-md-6">
-                  <h2>{{title}}</h2>
-                </div>
-              </div>
-            </a>
+          {{#each books}}
+            <div class="row align-center mb-5" class="list-group-item">
+              <a href="/book/{{id}}"><h2>{{title}}</h2></a>
+              <ul class="list-group">
+                <p>Reviews From You:</p>
+                {{#each reviews}}
+                  <div class="list-group-item">
+                    <p>{{review_content}}</p>
+                  </div>
+                {{/each}}
+              </ul>
+            </div>
           {{/each}}
         </div>
       </div>

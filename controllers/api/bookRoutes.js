@@ -18,11 +18,11 @@ router.post("/:id", withAuth, async (req, res) => {
 });
 
 // can only update review to this book if logged in
-router.put("/:id", withAuth, async (req, res) => {
+router.put("/review", withAuth, async (req, res) => {
   try {
     const updatedReview = await Review.update(req.body, {
       where: {
-        id: req.params.id,
+        id: book_id,
       },
     });
 
@@ -38,7 +38,7 @@ router.put("/:id", withAuth, async (req, res) => {
 });
 
 // can only delete review to this book if logged in
-router.delete("/:id", withAuth, async (req, res) => {
+router.delete("/review", withAuth, async (req, res) => {
   try {
     const deletedReview = await Review.destroy({
       where: {
