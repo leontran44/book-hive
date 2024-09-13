@@ -23,16 +23,17 @@ Book.init(
       allowNull: false,
     },
     genre: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING,  
       allowNull: false,
     },
     cover_image: {
-      type: DataTypes.STRING, // URL or relative path to cover image
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {
     sequelize,
-    timestamps: true, // Enable timestamps for creation and updates
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: "book",
