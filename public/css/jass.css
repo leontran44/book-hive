@@ -12,9 +12,20 @@ h2 {
   font-weight: bold; /* Corrected from font-style to font-weight */
 }
 
+h3 {
+  color: #000000;
+  text-align: center;
+  font-weight: bold; /* Corrected from font-style to font-weight */
+}
+
+h5 {
+  color: #007bff;
+}
+
 p {
   font-size: 1rem;
   color: #6c757d;
+  text-align: center;
 }
 
 .btn-search {
@@ -35,6 +46,16 @@ p {
 .btn-dark {
   background-color: #000000;
   border-color: #000000;
+}
+
+.btn-login,
+.btn-signup {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+  background-color: rgb(249, 174, 43) !important;
+  border-color: #333333 !important;
 }
 
 /* Navbar Styles */
@@ -209,8 +230,8 @@ img {
 .review-card h5,
 .review-card p,
 .review-card small {
-  font-family: Arial, sans-serif;
-  color: #000;
+  font-family: Arial, sans-serif; /* Ensure Arial font */
+  color: #000; /* Text color is black */
 }
 
 .review-stars {
@@ -219,7 +240,7 @@ img {
 
 /* Star icons */
 .review-stars .star {
-  color: #FFD700; /* Gold color for filled stars */
+  color: #ffd700; /* Gold color for filled stars */
 }
 
 .review-stars .far {
@@ -257,6 +278,8 @@ img {
   padding: 10px;
   margin-bottom: 10px;
   text-align: left;
+  background-color: rgb(249, 174, 43) !important;
+  border-color: #333333 !important;
 }
 
 /* Bulkier Star Rating Styles */
