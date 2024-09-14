@@ -1,47 +1,59 @@
-// Cache the model after it's loaded to avoid reloading it multiple times
-let model;
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("TensorFlow.js loaded");
 
-// Function to load the TensorFlow toxicity model
-async function loadModel() {
-  if (!model) {
-    model = await toxicity.load(0.9); // Load the model with a confidence threshold of 0.9
-  }
-  return model;
-}
+  const reviewForm = document.querySelector("#review-form");
+  const reviewInput = document.querySelector("#review-input");
+  const reviewList = document.querySelector("#review-list");
 
-// Function to analyze sentiment of input text and color stars based on the toxicity score
-// Parameters:
-//  - text: User input text (e.g., a review)
-//  - starElements: DOM elements representing the stars in the UI
-async function analyzeSentiment(text, starElements) {
-  // Check if the input text is empty
-  if (!text) {
-    console.error('Text input is empty!'); // Handle the case of empty input text
-    return;
+  // Load the TensorFlow toxicity model with a threshold of 0.9
+  const threshold = 0.9;
+  let model;
+  try {
+    model = await toxicity.load(threshold);
+    console.log("Toxicity model loaded successfully.");
+  } catch (error) {
+    console.error("Error loading the toxicity model:", error);
+    return; // Don't proceed without the model
   }
 
-  // Load the toxicity model
-  const model = await loadModel();
+  // Analyze the review's sentiment when the form is submitted
+  reviewForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const reviewText = reviewInput.value.trim();
+    if (!reviewText) return;
 
-  // Use the model to classify the input text and return predictions
-  const predictions = await model.classify([text]);
-
-  // Calculate the toxic score by counting the number of toxic matches
-  const toxicScore = predictions.reduce((score, prediction) =>
-    prediction.results[0].match ? score + 1 : score, 0
-  );
-
-  // Color the stars based on the toxic score
-  starElements.forEach(function(star) {
-    if (toxicScore === 0) {
-      // If there is no toxicity, make the stars green (positive sentiment)
-      star.style.color = 'green';
-    } else if (toxicScore <= 3) {
-      // If the toxicity score is between 1 and 3, make the stars yellow (neutral/mixed sentiment)
-      star.style.color = 'yellow';
-    } else {
-      // If the toxicity score is greater than 3, make the stars red (negative sentiment)
-      star.style.color = 'red';
+    // Analyze the review using the loaded model
+    let results;
+    try {
+      results = await model.classify([reviewText]);
+      console.log("Review analysis results:", results);
+    } catch (error) {
+      console.error("Error analyzing the review:", error);
+      return;
     }
+
+    // Check if the review contains any toxicity and flag it
+    const isToxic = results.some((prediction) => {
+      return prediction.results[0].match;
+    });
+
+    if (isToxic) {
+      alert("Your review contains negative sentiment or inappropriate language. Please revise.");
+      return;
+    }
+
+    // If the review is not toxic, proceed with submitting it
+    const reviewItem = document.createElement("li");
+    reviewItem.classList.add("list-group-item");
+
+    // Create a new review element
+    const reviewContent = document.createElement("p");
+    reviewContent.textContent = reviewText;
+
+    reviewItem.appendChild(reviewContent);
+    reviewList.appendChild(reviewItem);
+
+    // Clear the review input after successful submission
+    reviewInput.value = "";
   });
-}
+});

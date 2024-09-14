@@ -10,7 +10,6 @@ h2 {
   color: #000000;
   text-align: center;
   font-style: bold;
-
 }
 
 p {
@@ -26,7 +25,7 @@ p {
 }
 
 .btn-search:hover {
-  background-color: #ffffff; 
+  background-color: #ffffff;
   color: rgb(249, 174, 43);
   border: 1px solid rgb(249, 174, 43);
 }
@@ -37,15 +36,12 @@ p {
   border-color: #000000;
 }
 
-
-
 /* Navbar Styles */
 .navbar {
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Style for the BOOKHIVE title */
 .navbar-brand .book {
   font-weight: bold;
   color: black;
@@ -57,7 +53,6 @@ p {
   color: rgb(249, 174, 43);
   font-size: 30px;
 }
-
 
 .nav-link {
   color: #000;
@@ -156,16 +151,14 @@ img {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
 .btn-secondary {
   background-color: white !important;
   color: black !important;
   border: 1px solid black !important;
   padding: 10px;
-  font-size: 1rem; 
-  margin-left: 10px; 
+  font-size: 1rem;
+  margin-left: 10px;
 }
-
 
 .btn-secondary:hover {
   background-color: #ffffff !important;
@@ -179,41 +172,41 @@ img {
 
 /* Book Info Section */
 .book-details {
-  border: 2px solid #000; 
-  padding: 20px; /* Adds space inside the border */
-  background-color: #fff; /* Optional: background color inside the box */
+  border: 2px solid #000;
+  padding: 20px;
+  background-color: #fff;
 }
 
 .book-details h5, .book-details p {
-  font-family: Arial, sans-serif; /* Ensures Arial font */
-  color: #000; /* Text color is black */
-  margin-bottom: 10px; /* Space between the text elements */
+  font-family: Arial, sans-serif;
+  color: #000;
+  margin-bottom: 10px;
 }
 
 .book-details h5 {
   font-weight: bold;
-  margin-top: 0; /* Removes unnecessary space at the top */
+  margin-top: 0;
 }
 
 /* User Reviews Section */
 .user-reviews h3 {
   font-size: 25px;
-  color: black; /* Change heading color to black */
+  color: black;
   font-style: bold;
   padding-bottom: 30px;
 }
 
 /* Individual Review Card Styles */
 .review-card {
-  border: 2px solid #000; /* Black border */
+  border: 2px solid #000;
   padding: 15px;
   background-color: #fff;
   height: 100%;
 }
 
 .review-card h5, .review-card p, .review-card small {
-  font-family: Arial, sans-serif; /* Ensure Arial font */
-  color: #000; /* Text color is black */
+  font-family: Arial, sans-serif;
+  color: #000;
 }
 
 .review-stars {
@@ -239,18 +232,18 @@ img {
 /* Add a Review Styles */
 .add-review h3 {
   font-size: 15px;
-  color: black; /* Change heading color to black */
+  color: black;
   font-style: italic;
 }
 
 .btn-primary {
-  background-color: rgb(249, 174, 43) !important; /* Change button background color to black */
+  background-color: rgb(249, 174, 43) !important;
   border-color: rgb(249, 174, 43) !important;
   color: black !important;
 }
 
 .btn-primary:hover {
-  background-color:rgb(249, 174, 43) !important; /* Darker shade on hover */
+  background-color: rgb(249, 174, 43) !important;
   border-color: #333333 !important;
 }
 
@@ -260,3 +253,50 @@ img {
   margin-bottom: 10px;
   text-align: left;
 }
+
+/* Bulkier Star Rating Styles */
+.star-rating .star {
+  font-size: 36px !important; 
+  font-weight: bold; 
+  color: #ccc;  
+  cursor: pointer; 
+  transition: color 0.2s ease, transform 0.2s ease;  
+  font-family: "Arial", sans-serif; 
+}
+
+/* Color the selected stars */
+.star-rating .star.selected {
+  color: #FFD700;  
+}
+
+
+.star-rating .star[data-value="1"].selected {
+  color: #FF4C4C; /* Red for 1 star */
+}
+
+.star-rating .star[data-value="2"].selected {
+  color: #FF9F1C; /* Orange for 2 stars */
+}
+
+.star-rating .star[data-value="3"].selected {
+  color: #FFD700; /* Yellow for 3 stars */
+}
+
+.star-rating .star[data-value="4"].selected {
+  color: #B4D455; /* Light green for 4 stars */
+}
+
+.star-rating .star[data-value="5"].selected {
+  color: #4CAF50; /* Green for 5 stars */
+}
+
+/* Gray out unselected stars */
+.star-rating .star:not(.selected) {
+  color: #ccc;  
+}
+
+/* Hover Effect (Optional) */
+.star-rating .star:hover {
+  transform: scale(1.2); 
+}
+
