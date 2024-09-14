@@ -11,6 +11,10 @@ h2 {
   text-align: center;
   font-style: bold;
 
+h3 {
+  color: #000000;
+  text-align: center;
+  font-style: bold;
 }
 
 
@@ -21,6 +25,7 @@ h3, h5 {
 p {
   font-size: 1rem;
   color: #6c757d;
+  text-align: center;
 }
 
 .btn-search {
@@ -31,7 +36,7 @@ p {
 }
 
 .btn-search:hover {
-  background-color: #ffffff; 
+  background-color: #ffffff;
   color: rgb(249, 174, 43);
   border: 1px solid rgb(249, 174, 43);
 }
@@ -67,7 +72,6 @@ p {
   font-size: 30px;
 }
 
-
 .nav-link {
   color: #000;
   font-weight: 500;
@@ -83,7 +87,11 @@ p {
   padding: 15px;
 }
 
-header, .books-section, .user-info, .signup-form, .signout-info {
+header,
+.books-section,
+.user-info,
+.signup-form,
+.signout-info {
   margin-top: 40px;
   text-align: center;
 }
@@ -165,16 +173,14 @@ img {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
 .btn-secondary {
   background-color: white !important;
   color: black !important;
   border: 1px solid black !important;
-  padding: 5px 12px; 
-  font-size: 0.85rem; 
-  margin-left: 10px;
+  padding: 10px;
+  font-size: 1rem; 
+  margin-left: 10px; 
 }
-
 
 .btn-secondary:hover {
   background-color: #ffffff !important;
@@ -184,4 +190,88 @@ img {
 
 .form-label {
   color: black !important;
+}
+
+/* Book Info Section */
+.book-details {
+  border: 2px solid #000; 
+  padding: 20px; /* Adds space inside the border */
+  background-color: #fff; /* Optional: background color inside the box */
+}
+
+.book-details h5, .book-details p {
+  font-family: Arial, sans-serif; /* Ensures Arial font */
+  color: #000; /* Text color is black */
+  margin-bottom: 10px; /* Space between the text elements */
+}
+
+.book-details h5 {
+  font-weight: bold;
+  margin-top: 0; /* Removes unnecessary space at the top */
+}
+
+/* User Reviews Section */
+.user-reviews h3 {
+  font-size: 25px;
+  color: black; /* Change heading color to black */
+  font-style: bold;
+  padding-bottom: 30px;
+}
+
+/* Individual Review Card Styles */
+.review-card {
+  border: 2px solid #000; /* Black border */
+  padding: 15px;
+  background-color: #fff;
+  height: 100%;
+}
+
+.review-card h5, .review-card p, .review-card small {
+  font-family: Arial, sans-serif; /* Ensure Arial font */
+  color: #000; /* Text color is black */
+}
+
+.review-stars {
+  margin-top: 10px;
+}
+
+/* Star icons */
+.review-stars .star {
+  color: #FFD700; /* Gold color for filled stars */
+}
+
+.review-stars .far {
+  color: #e0e0e0; /* Grey for unfilled stars */
+}
+
+/* Responsive: Make sure reviews stack on smaller screens */
+@media (max-width: 768px) {
+  .review-card {
+    margin-bottom: 20px;
+  }
+}
+
+/* Add a Review Styles */
+.add-review h3 {
+  font-size: 15px;
+  color: black; /* Change heading color to black */
+  font-style: italic;
+}
+
+.btn-primary {
+  background-color: rgb(249, 174, 43) !important; /* Change button background color to black */
+  border-color: rgb(249, 174, 43) !important;
+  color: black !important;
+}
+
+.btn-primary:hover {
+  background-color:rgb(249, 174, 43) !important; /* Darker shade on hover */
+  border-color: #333333 !important;
+}
+
+.btn-login, .btn-signup {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: left;
 }
