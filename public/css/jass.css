@@ -9,7 +9,7 @@ body {
 h2 {
   color: #000000;
   text-align: center;
-  font-style: bold;
+  font-weight: bold; /* Corrected from font-style to font-weight */
 }
 
 p {
@@ -31,7 +31,8 @@ p {
 }
 
 /* Button Styles */
-.btn-primary {
+/* Renamed .btn-primary to .btn-dark to avoid conflict */
+.btn-dark {
   background-color: #000000;
   border-color: #000000;
 }
@@ -69,7 +70,11 @@ p {
   padding: 15px;
 }
 
-header, .books-section, .user-info, .signup-form, .signout-info {
+header,
+.books-section,
+.user-info,
+.signup-form,
+.signout-info {
   margin-top: 40px;
   text-align: center;
 }
@@ -77,7 +82,7 @@ header, .books-section, .user-info, .signup-form, .signout-info {
 /* Form Styles */
 .form-label {
   font-weight: bold;
-  color: #007bff;
+  color: black; /* Unified color to black */
 }
 
 input.form-control {
@@ -166,10 +171,6 @@ img {
   border: 1px solid rgb(249, 174, 43) !important;
 }
 
-.form-label {
-  color: black !important;
-}
-
 /* Book Info Section */
 .book-details {
   border: 2px solid #000;
@@ -177,7 +178,8 @@ img {
   background-color: #fff;
 }
 
-.book-details h5, .book-details p {
+.book-details h5,
+.book-details p {
   font-family: Arial, sans-serif;
   color: #000;
   margin-bottom: 10px;
@@ -192,7 +194,7 @@ img {
 .user-reviews h3 {
   font-size: 25px;
   color: black;
-  font-style: bold;
+  font-weight: bold; /* Corrected from font-style to font-weight */
   padding-bottom: 30px;
 }
 
@@ -204,7 +206,9 @@ img {
   height: 100%;
 }
 
-.review-card h5, .review-card p, .review-card small {
+.review-card h5,
+.review-card p,
+.review-card small {
   font-family: Arial, sans-serif;
   color: #000;
 }
@@ -247,7 +251,8 @@ img {
   border-color: #333333 !important;
 }
 
-.btn-login, .btn-signup {
+.btn-login,
+.btn-signup {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -256,19 +261,18 @@ img {
 
 /* Bulkier Star Rating Styles */
 .star-rating .star {
-  font-size: 36px !important; 
-  font-weight: bold; 
-  color: #ccc;  
-  cursor: pointer; 
-  transition: color 0.2s ease, transform 0.2s ease;  
-  font-family: "Arial", sans-serif; 
+  font-size: 36px !important;
+  font-weight: bold;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+  font-family: "Arial", sans-serif;
 }
 
 /* Color the selected stars */
 .star-rating .star.selected {
-  color: #FFD700;  
+  color: #FFD700;
 }
-
 
 .star-rating .star[data-value="1"].selected {
   color: #FF4C4C; /* Red for 1 star */
@@ -292,11 +296,10 @@ img {
 
 /* Gray out unselected stars */
 .star-rating .star:not(.selected) {
-  color: #ccc;  
+  color: #ccc;
 }
 
 /* Hover Effect (Optional) */
 .star-rating .star:hover {
-  transform: scale(1.2); 
+  transform: scale(1.2);
 }
-
