@@ -10,6 +10,7 @@ h2 {
   color: #000000;
   text-align: center;
   font-style: bold;
+}
 
 h3 {
   color: #000000;
@@ -17,8 +18,8 @@ h3 {
   font-style: bold;
 }
 
-
-h3, h5 {
+h3,
+h5 {
   color: #007bff;
 }
 
@@ -47,7 +48,8 @@ p {
   border-color: #000000;
 }
 
-.btn-login, .btn-signup {
+.btn-login,
+.btn-signup {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -178,8 +180,8 @@ img {
   color: black !important;
   border: 1px solid black !important;
   padding: 10px;
-  font-size: 1rem; 
-  margin-left: 10px; 
+  font-size: 1rem;
+  margin-left: 10px;
 }
 
 .btn-secondary:hover {
@@ -194,12 +196,13 @@ img {
 
 /* Book Info Section */
 .book-details {
-  border: 2px solid #000; 
+  border: 2px solid #000;
   padding: 20px; /* Adds space inside the border */
   background-color: #fff; /* Optional: background color inside the box */
 }
 
-.book-details h5, .book-details p {
+.book-details h5,
+.book-details p {
   font-family: Arial, sans-serif; /* Ensures Arial font */
   color: #000; /* Text color is black */
   margin-bottom: 10px; /* Space between the text elements */
@@ -226,7 +229,9 @@ img {
   height: 100%;
 }
 
-.review-card h5, .review-card p, .review-card small {
+.review-card h5,
+.review-card p,
+.review-card small {
   font-family: Arial, sans-serif; /* Ensure Arial font */
   color: #000; /* Text color is black */
 }
@@ -237,7 +242,7 @@ img {
 
 /* Star icons */
 .review-stars .star {
-  color: #FFD700; /* Gold color for filled stars */
+  color: #ffd700; /* Gold color for filled stars */
 }
 
 .review-stars .far {
@@ -259,17 +264,22 @@ img {
 }
 
 .btn-primary {
-  background-color: rgb(249, 174, 43) !important; /* Change button background color to black */
+  background-color: rgb(
+    249,
+    174,
+    43
+  ) !important; /* Change button background color to black */
   border-color: rgb(249, 174, 43) !important;
   color: black !important;
 }
 
 .btn-primary:hover {
-  background-color:rgb(249, 174, 43) !important; /* Darker shade on hover */
+  background-color: rgb(249, 174, 43) !important; /* Darker shade on hover */
   border-color: #333333 !important;
 }
 
-.btn-login, .btn-signup {
+.btn-login,
+.btn-signup {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
