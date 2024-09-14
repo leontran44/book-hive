@@ -1,19 +1,17 @@
 <div class="container">
-
   <!-- Book Details Section -->
   <section class="book-details my-5">
-    
     <div class="row">
       <!-- Book Title and Rating -->
       <div class="col-md-8">
         <h2>{{title}}</h2>
         <p class="text-muted">
           Rating:
-          <strong>{{book.rating}}</strong>/5 ({{book.numRatings}}
-          ratings)
+          <strong>{{book.rating}}</strong>/5 ({{book.numRatings}} ratings)
         </p>
       </div>
-    </div> 
+    </div>
+  </section>
 
   <!-- Book Description, Author, Genre -->
   <section class="book-info">
@@ -39,52 +37,60 @@
     <h3>ADD REVIEW</h3>
     <form id="review-form">
       <div class="mb-3">
-        {{!-- <label for="review-input" class="form-label">Your Review</label> --}}
-        <textarea
-          class="form-control"
-          id="review-input"
-          rows="3"
-          required
-        ></textarea>
+        <textarea class="form-control" id="review-input" rows="3" required></textarea>
       </div>
+
+      <!-- Star rating selection -->
+      <div class="mb-3">
+        <label class="form-label">Your Rating:</label>
+<!-- Star rating selection for user input -->
+<div class="star-rating">
+  <span class="star" data-value="1">★</span>
+  <span class="star" data-value="2">★</span>
+  <span class="star" data-value="3">★</span>
+  <span class="star" data-value="4">★</span>
+  <span class="star" data-value="5">★</span>
+</div>
+        <input type="hidden" id="rating-value" name="rating" value="0">
+      </div>
+
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <ul id="review-list" class="mt-3"></ul>
-    <!-- Reviews will be appended here -->
   </section>
   {{/if}}
-
-
 
   <!-- User Reviews Section -->
   <section class="user-reviews my-5">
     <h3>REVIEWS</h3>
     <div class="row" id="review-list">
       {{#each reviews}}
-        <div class="col-md-4 mb-3">
-          <h5>Reviewed by: {{user.username}}</h5>
+        <div class="col-md-4 mb-3 review-card">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5>Reviewed by: {{user.username}}</h5>
+            <!-- Star elements for the review rating -->
+            <div class="review-stars">
+              {{!-- Loop to render filled stars --}}
+              {{#each (range 1 this.rating)}}
+                <span class="star selected">★</span>
+              {{/each}}
+
+              {{!-- Loop to render empty stars if rating is less than 5 --}}
+              {{#each (range this.rating 5)}}
+                <span class="star unselected">★</span>
+              {{/each}}
+            </div>
+          </div>
           <p>{{review_content}}</p>
           <small class="text-muted">Rating: {{this.rating}}/5</small>
-
-          <!-- Add star elements if you want to display sentiment analysis visually -->
-          <div class="review-stars">
-            <i class="star fas fa-star"></i>
-            <i class="star fas fa-star"></i>
-            <i class="star fas fa-star"></i>
-            <i class="star fas fa-star"></i>
-            <i class="star fas fa-star"></i>
-          </div>
         </div>
       {{/each}}
     </div>
   </section>
- 
 </div>
 
-<!-- Include FontAwesome for star icons if needed -->
-<script
-  src="https://kit.fontawesome.com/a076d05399.js"
-  crossorigin="anonymous"
-></script>
-<!-- Link the bookpage.js script -->
+<!-- Link to your custom CSS file -->
+<link rel="stylesheet" href="/css/jass.css" />
+
+<!-- Include the JavaScript -->
 <script src="/js/bookpage.js"></script>
+
