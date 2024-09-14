@@ -16,7 +16,15 @@ h3 {
   color: #000000;
   text-align: center;
   font-weight: bold; /* Corrected from font-style to font-weight */
+  font-style: bold;
 }
+
+h3 {
+  color: #000000;
+  text-align: center;
+  font-style: bold;
+}
+
 
 h5 {
   color: #007bff;
@@ -227,9 +235,8 @@ img {
   height: 100%;
 }
 
-.review-card h5,
-.review-card p,
-.review-card small {
+.review-card h5, .review-card p, .review-card small {
+
   font-family: Arial, sans-serif; /* Ensure Arial font */
   color: #000; /* Text color is black */
 }
@@ -268,7 +275,14 @@ img {
 }
 
 .btn-primary:hover {
-  background-color: rgb(249, 174, 43) !important;
+  background-color: rgb(249, 174, 43) !important; /* Darker shade on hover */
+  border-color: #333333 !important;
+}
+
+.btn-login,
+.btn-signup {
+  background-color:rgb(249, 174, 43) !important; /* Darker shade on hover */
+
   border-color: #333333 !important;
 }
 
@@ -326,3 +340,4 @@ img {
 .star-rating .star:hover {
   transform: scale(1.2);
 }
+
