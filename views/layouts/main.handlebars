@@ -1,3 +1,5 @@
+<!-- main.handlebars -->
+
 <html lang="en">
 
   <head>
@@ -14,7 +16,6 @@
   <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
       <div class="container-fluid">
         <a class="navbar-brand" href="/">
           <span class="book">BOOK</span><span class="hive">HIVE</span>
@@ -22,41 +23,39 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <!-- Other navigation links can go here -->
           </ul>
         </div>
 
-        <!-- Logout button -->
-        <div class="d-flex align-items-center"></div>
-        <a class="btn btn-secondary me-2" href="/">Home</a>
-
-        <!-- Profile button -->
+        <!-- Logout/Profile/Login buttons -->
         <div class="d-flex align-items-center">
-          <a class="btn btn-secondary me-2" href="/profile">Profile</a>
+          <a class="btn btn-primary me-2" href="/" id="home-link">Home</a>
+          <a class="btn btn-primary me-2" href="/profile">Profile</a>
 
-          {{#if loggedIn}}
-            <a
-              class="btn btn-secondary"
-              href="/logout"
-              id="logout-link"
-            >Logout</a>
+          {{#if logged_in}}
+            <!-- Show logout button if logged in -->
+            <a class="btn btn-primary" href="/" id="logout-link">Logout</a>
           {{else}}
-            <a class="btn btn-secondary" href="/login" id="login-link">Login</a>
+            <!-- Show login button if not logged in -->
+            <a class="btn btn-primary" href="/login" id="login-link">Login</a>
           {{/if}}
         </div>
       </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="container container-fluid mt-5">
+    <main class="container-fluid mt-5">
       {{{body}}}
     </main>
 
     <!-- Footer -->
-    <footer>
-      <!-- Footer content -->
+    <footer class="footer mt-auto py-3">
+      <div class="container">
+        <span class="text-muted">© 2024 BookHive</span>
+      </div>
     </footer>
 
-    <!-- Load TensorFlow.js and your custom script at the end -->
+    <!-- Include common JavaScript Files -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"

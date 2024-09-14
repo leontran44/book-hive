@@ -58,7 +58,7 @@ router.get("/profile", withAuth, async (req, res) => {
           include: [
             {
               model: Book,
-              attributes: ["title"],
+              attributes: ["id", "title"],
             },
           ],
         },
@@ -67,8 +67,25 @@ router.get("/profile", withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
 
+    const booksMap = {};
+
+    user.reviews.forEach((review) => {
+      const bookId = review.book.id;
+      if (!booksMap[bookId]) {
+        booksMap[bookId] = {
+          title: review.book.title,
+          id: bookId,
+          reviews: [],
+        };
+      }
+      booksMap[bookId].reviews.push(review);
+    });
+
+    const books = Object.values(booksMap);
+
     res.render("userpage", {
       ...user,
+      books,
       logged_in: true,
     });
   } catch (err) {
