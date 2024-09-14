@@ -10,12 +10,22 @@ h2 {
   color: #000000;
   text-align: center;
   font-style: bold;
+}
 
+h3 {
+  color: #000000;
+  text-align: center;
+  font-style: bold;
+}
+
+h5 {
+  color: #007bff;
 }
 
 p {
   font-size: 1rem;
   color: #6c757d;
+  text-align: center;
 }
 
 .btn-search {
@@ -26,7 +36,7 @@ p {
 }
 
 .btn-search:hover {
-  background-color: #ffffff; 
+  background-color: #ffffff;
   color: rgb(249, 174, 43);
   border: 1px solid rgb(249, 174, 43);
 }
@@ -37,6 +47,12 @@ p {
   border-color: #000000;
 }
 
+.btn-login,
+.btn-signup {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
 
 
 /* Navbar Styles */
@@ -58,7 +74,6 @@ p {
   font-size: 30px;
 }
 
-
 .nav-link {
   color: #000;
   font-weight: 500;
@@ -74,7 +89,11 @@ p {
   padding: 15px;
 }
 
-header, .books-section, .user-info, .signup-form, .signout-info {
+header,
+.books-section,
+.user-info,
+.signup-form,
+.signout-info {
   margin-top: 40px;
   text-align: center;
 }
@@ -156,16 +175,14 @@ img {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
 .btn-secondary {
   background-color: white !important;
   color: black !important;
   border: 1px solid black !important;
   padding: 10px;
-  font-size: 1rem; 
-  margin-left: 10px; 
+  font-size: 1rem;
+  margin-left: 10px;
 }
-
 
 .btn-secondary:hover {
   background-color: #ffffff !important;
@@ -211,6 +228,7 @@ img {
   height: 100%;
 }
 
+
 .review-card h5, .review-card p, .review-card small {
   font-family: Arial, sans-serif; /* Ensure Arial font */
   color: #000; /* Text color is black */
@@ -222,7 +240,7 @@ img {
 
 /* Star icons */
 .review-stars .star {
-  color: #FFD700; /* Gold color for filled stars */
+  color: #ffd700; /* Gold color for filled stars */
 }
 
 .review-stars .far {
@@ -244,12 +262,23 @@ img {
 }
 
 .btn-primary {
-  background-color: rgb(249, 174, 43) !important; /* Change button background color to black */
+
+  background-color: rgb(
+    249,
+    174,
+    43
+  ) !important; /* Change button background color to black */
   border-color: rgb(249, 174, 43) !important;
   color: black !important;
 }
 
 .btn-primary:hover {
+  background-color: rgb(249, 174, 43) !important; /* Darker shade on hover */
+  border-color: #333333 !important;
+}
+
+.btn-login,
+.btn-signup {
   background-color:rgb(249, 174, 43) !important; /* Darker shade on hover */
   border-color: #333333 !important;
 }
@@ -260,3 +289,5 @@ img {
   margin-bottom: 10px;
   text-align: left;
 }
+
+
