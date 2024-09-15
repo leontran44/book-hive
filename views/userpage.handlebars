@@ -48,9 +48,14 @@
       <div class="col-md-4">
         <h3>Books I Recomend:</h3>
         <div class="list-group">
-          {{#each books}}
+          {{#each books as |book|}}
             <div class="row align-center mb-5" class="list-group-item">
-              <a href="/book/{{id}}"><h2>{{title}}</h2></a>
+              <a href="/book/{{book.id}}"><h2>{{book.title}}</h2></a>
+              <img
+                src="{{cover_image}}"
+                alt="Cover of {{title}}"
+                class="img-fluid mb-3 book-cover"
+              />
               <ul class="list-group">
                 <p>Reviews From You:</p>
                 {{#each reviews}}
