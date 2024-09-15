@@ -1,5 +1,3 @@
-<!-- main.handlebars -->
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -65,11 +63,12 @@
     </footer>
 
     <!-- Conditionally load TensorFlow and Toxicity model for pages that require it -->
-    {{#if tensorflowRequired}}
-      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"></script>
-      <script src="/js/tensorflow.js"></script>
-    {{/if}}
+{{#if tensorflowRequired}}
+  <!-- TensorFlow.js Script for sentiment analysis -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"></script>
+  <script src="/js/tensorflow.js" defer></script>  <!-- Your custom TensorFlow handling script -->
+{{/if}}
 
     <!-- Conditionally load bookpage.js on book-related pages -->
     {{#if bookpage}}
@@ -85,4 +84,3 @@
     ></script>
   </body>
 </html>
-

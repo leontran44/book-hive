@@ -2,16 +2,17 @@ const router = require("express").Router();
 const { User, Book, Review } = require("../models");
 const withAuth = require("../utils/auth");
 
-// home page (get all books)
+// Home page (get all books)
 router.get("/", async (req, res) => {
   try {
     const bookData = await Book.findAll({
       include: [
         {
           model: Review,
-          attributes: ["review_content"],
+          attributes: ["review_content", "rating"], // Include rating if needed
         },
       ],
+      order: [["createdAt", "DESC"]], // Order books by creation date (optional)
     });
 
     const books = bookData.map((book) => book.get({ plain: true }));
@@ -22,11 +23,15 @@ router.get("/", async (req, res) => {
       user_id: req.session.user_id,
     });
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err);
+    res.status(500).render("errorpage", {
+      message: "Failed to load books",
+      error: err,
+    }); // User-friendly error handling
   }
 });
 
-// login page
+// Login page
 router.get("/login", (req, res) => {
   if (req.session.logged_in) {
     res.redirect("/profile");
@@ -36,7 +41,7 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-// signup page
+// Signup page
 router.get("/signup", (req, res) => {
   if (req.session.logged_in) {
     res.redirect("/profile");
@@ -46,7 +51,7 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-// after a user logs in, they are directed to their profile page
+// After a user logs in, they are directed to their profile page
 router.get("/profile", withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
@@ -54,7 +59,7 @@ router.get("/profile", withAuth, async (req, res) => {
       include: [
         {
           model: Review,
-          attributes: ["review_content"],
+          attributes: ["review_content", "rating"], // Include rating here too
           include: [
             {
               model: Book,
@@ -67,40 +72,28 @@ router.get("/profile", withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
 
-    const booksMap = {};
-
-    user.reviews.forEach((review) => {
-      const bookId = review.book.id;
-      if (!booksMap[bookId]) {
-        booksMap[bookId] = {
-          title: review.book.title,
-          id: bookId,
-          reviews: [],
-        };
-      }
-      booksMap[bookId].reviews.push(review);
-    });
-
-    const books = Object.values(booksMap);
-
+    // Simplified approach: no need to manually map books
     res.render("userpage", {
       ...user,
-      books,
       logged_in: true,
     });
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err);
+    res.status(500).render("errorpage", {
+      message: "Failed to load profile",
+      error: err,
+    });
   }
 });
 
-// open a single book by its `book_id` and it's reviews
+// Open a single book by its `book_id` and its reviews
 router.get("/book/:id", async (req, res) => {
   try {
     const bookData = await Book.findByPk(req.params.id, {
       include: [
         {
           model: Review,
-          attributes: ["review_content"],
+          attributes: ["review_content", "rating"], // Include rating here as well
           include: [
             {
               model: User,
@@ -118,7 +111,11 @@ router.get("/book/:id", async (req, res) => {
       logged_in: req.session.logged_in,
     });
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err);
+    res.status(500).render("errorpage", {
+      message: "Failed to load book details",
+      error: err,
+    });
   }
 });
 

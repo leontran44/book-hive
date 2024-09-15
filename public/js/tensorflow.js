@@ -1,59 +1,100 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  console.log("TensorFlow.js loaded");
+const threshold = 0.9; // Confidence level for toxicity detection
 
-  const reviewForm = document.querySelector("#review-form");
-  const reviewInput = document.querySelector("#review-input");
-  const reviewList = document.querySelector("#review-list");
+// Function to load TensorFlow toxicity model and classify review
+async function analyzeReview() {
+  const reviewText = document.querySelector('#review-input')?.value.trim(); // Get the user's review input and trim whitespace
 
-  // Load the TensorFlow toxicity model with a threshold of 0.9
-  const threshold = 0.9;
-  let model;
-  try {
-    model = await toxicity.load(threshold);
-    console.log("Toxicity model loaded successfully.");
-  } catch (error) {
-    console.error("Error loading the toxicity model:", error);
-    return; // Don't proceed without the model
+  if (!reviewText) {
+    console.log("No review text provided.");
+    return;
   }
 
-  // Analyze the review's sentiment when the form is submitted
-  reviewForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const reviewText = reviewInput.value.trim();
-    if (!reviewText) return;
+  try {
+    const model = await toxicity.load(threshold); // Load the model
+    const predictions = await model.classify([reviewText]); // Classify the review text
 
-    // Analyze the review using the loaded model
-    let results;
-    try {
-      results = await model.classify([reviewText]);
-      console.log("Review analysis results:", results);
-    } catch (error) {
-      console.error("Error analyzing the review:", error);
-      return;
+    // Check for toxic content
+    const toxicPrediction = predictions.find(prediction => prediction.label === 'toxicity');
+
+    // Determine sentiment based on toxicity or lack thereof
+    let sentimentResult;
+    
+    if (toxicPrediction.results[0].match) {
+      sentimentResult = 'Negative';
+      console.log("Negative sentiment detected.");
+    } else if (reviewText.split(" ").length < 5) {
+      sentimentResult = 'Neutral'; // Very short reviews can be considered neutral
+      console.log("Neutral sentiment detected.");
+    } else {
+      sentimentResult = 'Positive';
+      console.log("Positive sentiment detected.");
     }
 
-    // Check if the review contains any toxicity and flag it
-    const isToxic = results.some((prediction) => {
-      return prediction.results[0].match;
-    });
+    // Display sentiment and update star rating
+    displaySentiment(sentimentResult);
+    updateStarRating(sentimentResult);
+  } catch (error) {
+    console.error("Error during sentiment analysis:", error);
+  }
+}
 
-    if (isToxic) {
-      alert("Your review contains negative sentiment or inappropriate language. Please revise.");
-      return;
-    }
+// Function to display sentiment result
+function displaySentiment(sentiment) {
+  const sentimentDisplay = document.getElementById('sentiment-result');
+  
+  if (sentimentDisplay) {
+    sentimentDisplay.textContent = `Your review sentiment is: ${sentiment}`;
+  }
+}
 
-    // If the review is not toxic, proceed with submitting it
-    const reviewItem = document.createElement("li");
-    reviewItem.classList.add("list-group-item");
+// Function to update the star rating based on sentiment analysis
+function updateStarRating(sentiment) {
+  const starContainer = document.querySelector('.review-stars');
 
-    // Create a new review element
-    const reviewContent = document.createElement("p");
-    reviewContent.textContent = reviewText;
+  if (!starContainer) {
+    console.error("Star container not found.");
+    return;
+  }
 
-    reviewItem.appendChild(reviewContent);
-    reviewList.appendChild(reviewItem);
+  if (sentiment === 'Positive') {
+    starContainer.innerHTML = `
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">★</span>
+    `;
+  } else if (sentiment === 'Neutral') {
+    starContainer.innerHTML = `
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">☆</span>
+      <span class="star">☆</span>
+    `;
+  } else {
+    // For negative sentiment
+    starContainer.innerHTML = `
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">☆</span>
+      <span class="star">☆</span>
+      <span class="star">☆</span>
+    `;
+  }
+}
 
-    // Clear the review input after successful submission
-    reviewInput.value = "";
+// Event listener to trigger analysis on form submission
+document.addEventListener('DOMContentLoaded', function() {
+  const reviewForm = document.querySelector('#review-form');
+
+  if (!reviewForm) {
+    console.error("Review form not found.");
+    return;
+  }
+
+  reviewForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+    analyzeReview(); // Call function to analyze review sentiment
   });
 });

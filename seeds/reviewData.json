@@ -1,17 +1,32 @@
 [
   {
-    "review_content": "This is a wonderful book. I really enjoyed it."
+    "review_content": "This is a wonderful book. I really enjoyed it.",
+    "rating": 5,
+    "book_id": 1,
+    "user_id": 1
   },
   {
-    "review_content": "The book is amazing. I would recommend it to anyone."
+    "review_content": "The book is amazing. I would recommend it to anyone.",
+    "rating": 4,
+    "book_id": 2,
+    "user_id": 2
   },
   {
-    "review_content": "This book took me on a journey. I loved it."
+    "review_content": "This book took me on a journey. I loved it.",
+    "rating": 5,
+    "book_id": 3,
+    "user_id": 3
   },
   {
-    "review_content": "It is an unforgetable book. I would read it again."
+    "review_content": "It is an unforgetable book. I would read it again.",
+    "rating": 4,
+    "book_id": 4,
+    "user_id": 4
   },
   {
-    "review_content": "I couldn't put this book down. It was so good."
+    "review_content": "I couldn't put this book down. It was so good.",
+    "rating": 5,
+    "book_id": 5,
+    "user_id": 5
   }
 ]
