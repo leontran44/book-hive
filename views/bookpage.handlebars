@@ -2,7 +2,6 @@
   <!-- Book Details Section -->
   <section class="book-details my-5">
     <div class="row">
-      <!-- Book Title and Rating -->
       <div class="col-md-8">
         <h2>{{title}}</h2>
       </div>
@@ -16,10 +15,8 @@
         <div class="book-details">
           <h5>Description:</h5>
           <p>{{description}}</p>
-
           <h5>Author:</h5>
           <p>{{author}}</p>
-
           <h5>Genre:</h5>
           <p>{{genre}}</p>
         </div>
@@ -31,12 +28,11 @@
   {{#if logged_in}}
   <section class="add-review my-5">
     <h3>ADD REVIEW</h3>
-    <form id="review-form">
+    <!-- Pass bookId as a data attribute in the form -->
+    <form id="review-form" data-book-id="{{id}}">
       <div class="mb-3">
         <textarea class="form-control" id="review-input" rows="3" required></textarea>
       </div>
-
-      <!-- Star rating selection -->
       <div class="mb-3 star-rating">
         <label class="form-label">Your Rating:</label>
         <span class="star" data-value="1">★</span>
@@ -46,14 +42,9 @@
         <span class="star" data-value="5">★</span>
         <input type="hidden" id="rating-value" name="rating" value="0">
       </div>
-
-      <!-- Sentiment Result Display -->
-      <div class="mb-3 sentiment-result">
-        <h5>Review Sentiment:</h5>
-        <!-- Initially empty; the sentiment (Positive, Neutral, or Negative) will be shown here -->
-        <p id="sentiment-result"></p>
+      <div class="mb-3">
+        <p id="sentiment-result">Your review sentiment will display here...</p>
       </div>
-
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </section>
@@ -68,16 +59,19 @@
         <div class="d-flex justify-content-between align-items-center">
           <h5>Reviewed by: {{user.username}}</h5>
 
+          <!-- Sentiment Result for each review -->
+          <div class="sentiment-result">
+            <p id="sentiment-{{@index}}">Analyzing sentiment...</p>
+          </div>
+
           <!-- Star elements for the review rating -->
-          <div class="review-stars">
-            <!-- Loop to render filled stars -->
+          <div class="review-stars" data-rating="{{this.rating}}">
             {{#each (range 1 this.rating)}}
-            <span class="star selected">★</span>
+              <span class="star selected" data-value="{{@index}}">★</span>
             {{/each}}
 
-            <!-- Loop to render empty stars if rating is less than 5 -->
-            {{#each (range this.rating 4)}}
-            <span class="star unselected">★</span>
+            {{#each (range this.rating 5)}}
+              <span class="star unselected" data-value="{{@index}}">★</span>
             {{/each}}
           </div>
         </div>
@@ -90,8 +84,7 @@
   </section>
 </div>
 
-<!-- Link to your custom CSS file -->
-<link rel="stylesheet" href="/css/jass.css" />
-
-<!-- Include the JavaScript -->
-<script src="/js/bookpage.js"></script>
+<!-- Include TensorFlow.js and Toxicity model for sentiment analysis -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"></script>
+<script src="/js/tensorflow.js"></script>

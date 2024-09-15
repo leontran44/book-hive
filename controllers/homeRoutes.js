@@ -63,7 +63,7 @@ router.get("/profile", withAuth, async (req, res) => {
           include: [
             {
               model: Book,
-              attributes: ["id", "title"],
+              attributes: ["id", "title", "cover_image"],
             },
           ],
         },
@@ -72,9 +72,27 @@ router.get("/profile", withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
 
-    // Simplified approach: no need to manually map books
+    // Optional: If you want to map books manually
+    const booksMap = {};
+
+    user.reviews.forEach((review) => {
+      const bookId = review.book.id;
+      if (!booksMap[bookId]) {
+        booksMap[bookId] = {
+          title: review.book.title,
+          id: bookId,
+          cover_image: review.book.cover_image,
+          reviews: [],
+        };
+      }
+      booksMap[bookId].reviews.push(review);
+    });
+
+    const books = Object.values(booksMap);
+
     res.render("userpage", {
       ...user,
+      books, // Pass books to the template
       logged_in: true,
     });
   } catch (err) {
@@ -120,3 +138,4 @@ router.get("/book/:id", async (req, res) => {
 });
 
 module.exports = router;
+

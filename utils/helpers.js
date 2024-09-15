@@ -26,5 +26,13 @@ module.exports = {
   // Helper to check if a number is less than or equal to another number
   lte: (a, b) => {
     return a <= b;
+  },
+
+  // Helper for equality check
+  if_eq: (a, b, options) => {
+    if (a === b) {
+      return options.fn(this);
+    }
+    return options.inverse(this);
   }
 };

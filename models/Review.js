@@ -17,11 +17,11 @@ Review.init(
       allowNull: false,
     },
     rating: {
-      type: DataTypes.INTEGER,  // Add the rating field here
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         min: 1,
-        max: 5,  // Ensure rating is between 1 and 5
+        max: 5,
       },
     },
     book_id: {
@@ -38,6 +38,10 @@ Review.init(
         key: "id",
       },
     },
+    sentiment: {
+      type: DataTypes.STRING,  // New column for storing sentiment
+      allowNull: false,
+    },
   },
   {
     sequelize,
@@ -49,4 +53,5 @@ Review.init(
 );
 
 module.exports = Review;
+
 

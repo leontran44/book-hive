@@ -1,100 +1,131 @@
-const threshold = 0.9; // Confidence level for toxicity detection
-
-// Function to load TensorFlow toxicity model and classify review
-async function analyzeReview() {
-  const reviewText = document.querySelector('#review-input')?.value.trim(); // Get the user's review input and trim whitespace
-
-  if (!reviewText) {
-    console.log("No review text provided.");
-    return;
-  }
-
-  try {
-    const model = await toxicity.load(threshold); // Load the model
-    const predictions = await model.classify([reviewText]); // Classify the review text
-
-    // Check for toxic content
-    const toxicPrediction = predictions.find(prediction => prediction.label === 'toxicity');
-
-    // Determine sentiment based on toxicity or lack thereof
-    let sentimentResult;
-    
-    if (toxicPrediction.results[0].match) {
-      sentimentResult = 'Negative';
-      console.log("Negative sentiment detected.");
-    } else if (reviewText.split(" ").length < 5) {
-      sentimentResult = 'Neutral'; // Very short reviews can be considered neutral
-      console.log("Neutral sentiment detected.");
-    } else {
-      sentimentResult = 'Positive';
-      console.log("Positive sentiment detected.");
+document.addEventListener("DOMContentLoaded", () => {
+  // Analyze the review text for sentiment based on star rating
+  const analyzeSentimentByRating = (rating) => {
+    if (rating <= 2) {
+      return { sentiment: "Negative", color: "red" };
+    } else if (rating === 3) {
+      return { sentiment: "Neutral", color: "orange" };
+    } else if (rating >= 4) {
+      return { sentiment: "Positive", color: "green" };
     }
+    return { sentiment: "Neutral", color: "gray" };  // Fallback if no rating
+  };
 
-    // Display sentiment and update star rating
-    displaySentiment(sentimentResult);
-    updateStarRating(sentimentResult);
-  } catch (error) {
-    console.error("Error during sentiment analysis:", error);
-  }
-}
+  // Run sentiment analysis for each review in the review list
+  const reviews = document.querySelectorAll(".review-card");
 
-// Function to display sentiment result
-function displaySentiment(sentiment) {
-  const sentimentDisplay = document.getElementById('sentiment-result');
-  
-  if (sentimentDisplay) {
-    sentimentDisplay.textContent = `Your review sentiment is: ${sentiment}`;
-  }
-}
+  reviews.forEach((review, index) => {
+    const selectedStars = review.querySelectorAll(".review-stars .selected").length;
+    const sentimentResult = document.getElementById(`sentiment-${index}`);
+    const { sentiment, color } = analyzeSentimentByRating(selectedStars);
 
-// Function to update the star rating based on sentiment analysis
-function updateStarRating(sentiment) {
-  const starContainer = document.querySelector('.review-stars');
-
-  if (!starContainer) {
-    console.error("Star container not found.");
-    return;
-  }
-
-  if (sentiment === 'Positive') {
-    starContainer.innerHTML = `
-      <span class="star">★</span>
-      <span class="star">★</span>
-      <span class="star">★</span>
-      <span class="star">★</span>
-      <span class="star">★</span>
-    `;
-  } else if (sentiment === 'Neutral') {
-    starContainer.innerHTML = `
-      <span class="star">★</span>
-      <span class="star">★</span>
-      <span class="star">★</span>
-      <span class="star">☆</span>
-      <span class="star">☆</span>
-    `;
-  } else {
-    // For negative sentiment
-    starContainer.innerHTML = `
-      <span class="star">★</span>
-      <span class="star">★</span>
-      <span class="star">☆</span>
-      <span class="star">☆</span>
-      <span class="star">☆</span>
-    `;
-  }
-}
-
-// Event listener to trigger analysis on form submission
-document.addEventListener('DOMContentLoaded', function() {
-  const reviewForm = document.querySelector('#review-form');
-
-  if (!reviewForm) {
-    console.error("Review form not found.");
-    return;
-  }
-
-  reviewForm.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
-    analyzeReview(); // Call function to analyze review sentiment
+    if (sentimentResult) {
+      sentimentResult.textContent = sentiment;
+      sentimentResult.style.color = color;
+    }
   });
+
+  // Handling review form submission and star selection for new review
+  const reviewForm = document.querySelector("#review-form");
+  const reviewInput = document.querySelector("#review-input");
+  const stars = document.querySelectorAll('.star-rating .star');
+  const ratingInput = document.getElementById('rating-value');
+  const sentimentDisplay = document.getElementById("sentiment-result"); 
+  let selectedRating = 0;
+
+  // ** Get the bookId from the form's data attribute **
+  const bookId = reviewForm.dataset.bookId;
+
+  // Function to highlight stars on hover
+  const highlightStars = (rating) => {
+    stars.forEach((star, index) => {
+      if (index < rating) {
+        star.classList.add('hovered');
+      } else {
+        star.classList.remove('hovered');
+      }
+    });
+  };
+
+  // Function to set the selected rating when a star is clicked
+  const setRating = (rating) => {
+    selectedRating = rating;
+    ratingInput.value = rating;
+
+    stars.forEach((star, index) => {
+      if (index < selectedRating) {
+        star.classList.add('selected');
+      } else {
+        star.classList.remove('selected');
+      }
+    });
+
+    const { sentiment, color } = analyzeSentimentByRating(selectedRating);
+    if (sentimentDisplay) {
+      sentimentDisplay.textContent = sentiment;
+      sentimentDisplay.style.color = color;
+    }
+  };
+
+  // Reset stars to reflect the selected rating after hover ends
+  const resetStars = () => {
+    stars.forEach((star, index) => {
+      star.classList.remove('hovered');
+      if (index < selectedRating) {
+        star.classList.add('selected');
+      } else {
+        star.classList.remove('selected');
+      }
+    });
+  };
+
+  // Attach event listeners to each star for hover and click actions
+  stars.forEach((star, index) => {
+    star.addEventListener('mouseover', () => highlightStars(index + 1));
+    star.addEventListener('click', () => setRating(index + 1));
+    star.addEventListener('mouseout', resetStars);
+  });
+
+  // Attach event listener to the form for submission
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const reviewContent = reviewInput.value.trim();
+      const rating = parseInt(ratingInput.value, 10);
+
+      if (isNaN(rating) || rating < 1 || rating > 5 || !reviewContent) {
+        console.error("Invalid review data");
+        return;
+      }
+
+      const { sentiment, color } = analyzeSentimentByRating(rating);
+
+      try {
+        const response = await fetch(`/api/book/${bookId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            rating,
+            review_content: reviewContent,
+            sentiment
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Review submitted:', data);
+
+        // Refresh the page to show the new review
+        window.location.reload(); // This reloads the page after a successful submission
+      } catch (error) {
+        console.error('Error submitting review:', error);
+      }
+    });
+  }
 });
