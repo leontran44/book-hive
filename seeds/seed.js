@@ -16,24 +16,17 @@ const seedDatabase = async () => {
     });
     console.log("Users created:", users);
 
-    // Create books and reviews as normal
+    // Create books as normal
     const books = await Book.bulkCreate(bookData, {
       returning: true,
     });
     console.log("Books created:", books);
 
-    for (const review of reviewData) {
-      const randomUser = users[Math.floor(Math.random() * users.length)];
-      const randomBook = await Book.findOne({
-        order: sequelize.random(),
-      });
-      const createdReview = await Review.create({
-        ...review,
-        user_id: randomUser.id,
-        book_id: randomBook.id,
-      });
-      console.log("Review created:", createdReview);
-    }
+    // Create reviews using the user_id and book_id from the reviewData.json
+    const reviews = await Review.bulkCreate(reviewData, {
+      returning: true,
+    });
+    console.log("Reviews created:", reviews);
 
     console.log("Database seeding completed successfully.");
     process.exit(0);

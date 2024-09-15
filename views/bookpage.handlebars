@@ -5,10 +5,6 @@
       <!-- Book Title and Rating -->
       <div class="col-md-8">
         <h2>{{title}}</h2>
-        <p class="text-muted">
-          Rating:
-          <strong>{{book.rating}}</strong>/5 ({{book.numRatings}} ratings)
-        </p>
       </div>
     </div>
   </section>
@@ -44,17 +40,21 @@
       </div>
 
       <!-- Star rating selection -->
-      <div class="mb-3">
+      <div class="mb-3 star-rating">
         <label class="form-label">Your Rating:</label>
-<!-- Star rating selection for user input -->
-<div class="star-rating">
-  <span class="star" data-value="1">★</span>
-  <span class="star" data-value="2">★</span>
-  <span class="star" data-value="3">★</span>
-  <span class="star" data-value="4">★</span>
-  <span class="star" data-value="5">★</span>
-</div>
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
         <input type="hidden" id="rating-value" name="rating" value="0">
+      </div>
+
+      <!-- Sentiment Result Display -->
+      <div class="mb-3 sentiment-result">
+        <h5>Review Sentiment:</h5>
+        <!-- Initially empty; the sentiment (Positive, Neutral, or Negative) will be shown here -->
+        <p id="sentiment-result"></p>
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -67,25 +67,27 @@
     <h3>REVIEWS</h3>
     <div class="row" id="review-list">
       {{#each reviews}}
-        <div class="col-md-4 mb-3 review-card">
-          <div class="d-flex justify-content-between align-items-center">
-            <h5>Reviewed by: {{user.username}}</h5>
-            <!-- Star elements for the review rating -->
-            <div class="review-stars">
-              {{!-- Loop to render filled stars --}}
-              {{#each (range 1 this.rating)}}
-                <span class="star selected">★</span>
-              {{/each}}
+      <div class="col-md-4 mb-3 review-card">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5>Reviewed by: {{user.username}}</h5>
 
-              {{!-- Loop to render empty stars if rating is less than 5 --}}
-              {{#each (range this.rating 5)}}
-                <span class="star unselected">★</span>
-              {{/each}}
-            </div>
+          <!-- Star elements for the review rating -->
+          <div class="review-stars">
+            <!-- Loop to render filled stars -->
+            {{#each (range 1 this.rating)}}
+            <span class="star selected">★</span>
+            {{/each}}
+
+            <!-- Loop to render empty stars if rating is less than 5 -->
+            {{#each (range this.rating 4)}}
+            <span class="star unselected">★</span>
+            {{/each}}
           </div>
-          <p>{{review_content}}</p>
-          <small class="text-muted">Rating: {{this.rating}}/5</small>
         </div>
+
+        <p>{{review_content}}</p>
+        <small class="text-muted">Rating: {{this.rating}}/5</small>
+      </div>
       {{/each}}
     </div>
   </section>
@@ -96,4 +98,3 @@
 
 <!-- Include the JavaScript -->
 <script src="/js/bookpage.js"></script>
-

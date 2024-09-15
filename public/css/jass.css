@@ -296,21 +296,62 @@ img {
   border-color: #333333 !important;
 }
 
-/* Bulkier Star Rating Styles */
-.star-rating .star {
-  font-size: 36px !important;
-  font-weight: bold;
-  color: #ccc;
+/* Container for review stars */
+.review-stars {
+  display: flex; /* Aligns stars in a row */
+  align-items: center; /* Optional: Aligns stars vertically centered */
+}
+
+/* General star styles for review stars */
+.review-stars .star {
+  font-size: 36px;
+  color: #ccc; /* Default grey for unselected stars */
   cursor: pointer;
   transition: color 0.2s ease, transform 0.2s ease;
   font-family: "Arial", sans-serif;
+  margin-right: 5px; /* Space between stars */
 }
 
-/* Color the selected stars */
-.star-rating .star.selected {
-  color: #FFD700;
+/* Maintain existing styles for star-rating component */
+.star-rating {
+  display: flex; /* Aligns stars in a row */
+  align-items: center; /* Optional: Aligns stars vertically centered */
 }
 
+.star-rating .star {
+  font-size: 36px;
+  color: #ccc; /* Default grey for unselected stars */
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+  font-family: "Arial", sans-serif;
+  margin-right: 5px; /* Space between stars */
+}
+
+
+
+
+/* Stars for selected ratings */
+.star.selected {
+  color: #FFD700; /* Gold color for selected stars */
+}
+
+.star.unselected {
+  color: #ccc; /* Grey color for unselected stars */
+}
+
+/* Half-selected star for fractional ratings */
+.star.half-selected {
+  background: linear-gradient(90deg, #FFD700 50%, #ccc 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hover effect for individual stars */
+.star:hover {
+  transform: scale(1.2); /* Slight zoom on hover */
+}
+
+/* Specific star colors based on value for the review form */
 .star-rating .star[data-value="1"].selected {
   color: #FF4C4C; /* Red for 1 star */
 }
@@ -331,13 +372,9 @@ img {
   color: #4CAF50; /* Green for 5 stars */
 }
 
-/* Gray out unselected stars */
-.star-rating .star:not(.selected) {
-  color: #ccc;
+/* Book rating info section */
+.book-rating-info {
+  font-size: 1rem;
+  color: #6c757d; /* Grey for rating info */
+  margin-bottom: 10px;
 }
-
-/* Hover Effect (Optional) */
-.star-rating .star:hover {
-  transform: scale(1.2);
-}
-

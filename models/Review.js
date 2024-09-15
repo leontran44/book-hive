@@ -1,3 +1,4 @@
+// models/Review.js
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
@@ -14,6 +15,14 @@ Review.init(
     review_content: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    rating: {
+      type: DataTypes.INTEGER,  // Add the rating field here
+      allowNull: false,
+      validate: {
+        min: 1,
+        max: 5,  // Ensure rating is between 1 and 5
+      },
     },
     book_id: {
       type: DataTypes.INTEGER,
@@ -40,3 +49,4 @@ Review.init(
 );
 
 module.exports = Review;
+
