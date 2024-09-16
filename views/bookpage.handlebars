@@ -11,7 +11,10 @@
   <!-- Book Description, Author, Genre -->
   <section class="book-info">
     <div class="row my-3">
-      <div class="col-md-8">
+      <div class="col-md-6">
+        <img src="{{cover_image}}" alt="Cover of {{title}}" class="img-fluid" style="max-width: 100%; height: auto;" />
+      </div>
+      <div class="col-md-6">
         <div class="book-details">
           <h5>Description:</h5>
           <p>{{description}}</p>
@@ -20,9 +23,6 @@
           <h5>Genre:</h5>
           <p>{{genre}}</p>
         </div>
-      </div>
-      <div class="col-md-4">
-        <img src="{{cover_image}}" alt="Cover of {{title}}" class="img-fluid" style="max-width: 50%; height: auto;" />
       </div>
     </div>
   </section>

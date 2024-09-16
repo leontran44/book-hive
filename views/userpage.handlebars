@@ -5,59 +5,59 @@
   </header>
 
   <!-- User Info Section -->
-  <section class="user-info text-center my-4">
-    <h2 class="my-3">{{username}}</h2>
-    {{! <img
-      src="/image/profile-image.png"
-      alt="User Avatar"
-      class="rounded-circle"
-      style="width: 150px; height: 150px;"
-    /> }}
-  </section>
+  <div class="row align-center mb-5">
+    <div class="col-md-6">
+      <section class="user-info text-center my-4">
+        <img src="/images/profile-image.png"  style="width: 200px; height: 300px;"/>
+        <h2 class="my-3">{{username}}</h2>
+      </section>
+    </div>
 
   <!-- Profile Update Section -->
-  <section class="update-profile-section my-5">
-    <h3 class="text-center">Update Username/Email</h3>
-    <form id="update-profile-form" class="mx-auto" style="max-width: 500px;">
-      <div class="mb-3">
-        <label for="name-input" class="form-label">Name</label>
-        <input
-          type="text"
-          id="name-input"
-          class="form-control"
-          value="{{username}}"
-        /><br />
-      </div>
-      <div class="mb-3">
-        <label for="email-input" class="form-label">Email</label>
-        <input
-          type="email"
-          id="email-input"
-          class="form-control"
-          value="{{email}}"
-        /><br />
-      </div>
-      <button type="submit" class="btn btn-primary">Update</button>
-    </form>
-  </section>
+    <div class="col-md-6">
+      <section class="update-profile-section my-5">
+        <h3 class="text-center">Update Username/Email</h3>
+        <form id="update-profile-form" class="mx-auto" style="max-width: 500px;">
+          <div class="mb-3">
+            <label for="name-input" class="form-label">Name</label>
+            <input
+              type="text"
+              id="name-input"
+              class="form-control"
+              value="{{username}}"
+            /><br />
+          </div>
+          <div class="mb-3">
+            <label for="email-input" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email-input"
+              class="form-control"
+              value="{{email}}"
+            /><br />
+          </div>
+          <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      </section>
+    </div>
+  </div>
 
   <!-- Books Section -->
   <section class="books-section my-5">
-    <div class="row">
-      <!-- Books I Have Read -->
-      <div class="col-md-4">
-        <h3>Books I Recomend:</h3>
-        <div class="list-group">
+        <h3 style="text-align: left;">Books I Reviewed:</h3>
+        <div>
           {{#each books as |book|}}
-            <div class="row align-center mb-5" class="list-group-item">
-              <a href="/book/{{book.id}}"><h2>{{book.title}}</h2></a>
-              <img
-                src="{{cover_image}}"
-                alt="Cover of {{title}}"
-                class="img-fluid mb-3 book-cover"
-              />
-              <ul class="list-group">
-                <p>Reviews From You:</p>
+            <div class="row align-center mb-5" class="list-group-item"  style="border: solid #888;">
+              <a href="/book/{{book.id}}" style="text-decoration: none;" class="col-md-4">
+                <h2>{{book.title}}</h2>
+                <img
+                  src="{{cover_image}}"
+                  alt="Cover of {{title}}"
+                  class="img-fluid mb-3 book-cover"
+                />
+              </a>
+              <ul class="col-md-8">
+                <h4>Reviews From You:</h4>
                 {{#each reviews}}
                   <div class="list-group-item">
                     <p>{{review_content}}</p>
@@ -67,8 +67,6 @@
             </div>
           {{/each}}
         </div>
-      </div>
-    </div>
   </section>
 
   <!-- Account Deletion Section -->
