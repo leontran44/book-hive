@@ -144,7 +144,7 @@ Code Quality:
 
 ### :rocket: Deployment
 
-- To deploy the website please visit : [ENTER WEBSITE HERE](WEBSITE HERE)
+- To deploy the website please visit : https://book-hive-c90u.onrender.com
 
  ###  :fire: Contribution
 
@@ -182,7 +182,7 @@ Development Tools:
 
 Below is a preview photo of the website.
 
-Click here to view preview photos: [CLICK HERE](https://book-hive-c90u.onrender.com)
+Click here to view preview photos: https://imgur.com/a/cAmy8Jw
 
 ## :star2: Credit/Acknowledgment
 
