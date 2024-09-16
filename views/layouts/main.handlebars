@@ -41,7 +41,7 @@
 
           {{#if logged_in}}
             <!-- Show logout button if logged in -->
-            <a class="btn btn-primary" href="/" id="logout-link">Logout</a>
+            <a class="btn btn-primary" href="/logout" id="logout-link">Logout</a>
           {{else}}
             <!-- Show login button if not logged in -->
             <a class="btn btn-primary" href="/login" id="login-link">Login</a>
@@ -63,12 +63,12 @@
     </footer>
 
     <!-- Conditionally load TensorFlow and Toxicity model for pages that require it -->
-{{#if tensorflowRequired}}
-  <!-- TensorFlow.js Script for sentiment analysis -->
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"></script>
-  <script src="/js/tensorflow.js" defer></script>  <!-- Your custom TensorFlow handling script -->
-{{/if}}
+    {{#if tensorflowRequired}}
+      <!-- TensorFlow.js Script for sentiment analysis -->
+      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"></script>
+      <script src="/js/tensorflow.js" defer></script>
+    {{/if}}
 
     <!-- Conditionally load bookpage.js on book-related pages -->
     {{#if bookpage}}
@@ -84,3 +84,4 @@
     ></script>
   </body>
 </html>
+
