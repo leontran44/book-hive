@@ -140,7 +140,10 @@ input.form-control {
 
 /* Avatar and Image Styles */
 img {
-  border-radius: 50%;
+  border-radius: 10%;
+  width: 150px;
+  display: block;
+  margin: 0 auto;
 }
 
 .card-img-top {
@@ -378,3 +381,19 @@ img {
   color: #6c757d; /* Grey for rating info */
   margin-bottom: 10px;
 }
+
+.list-group-item {
+  border-radius: 5px;
+  margin: 10px 80px;
+  padding: auto;
+}
+
+/* h2 {
+  color: #000000;
+  text-align: center;
+  font-weight: bold; 
+  display: inline-block;
+  align-items: center;
+  
+  
+}  */
